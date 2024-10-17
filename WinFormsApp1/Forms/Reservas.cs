@@ -8,17 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormsApp1.Files.Logica;
+using WinFormsApp1.Files;
 
 namespace WinFormsApp1.Forms._3
 {
     public partial class Reservas : Form
     {
         private string connectionString = "Data Source=C:\\Users\\Asus\\source\\repos\\WinFormsApp1\\WinFormsApp1\\Files\\Prueba.db";
-
+        private HistorialLogica historialLogica;
         public Reservas()
         {
             InitializeComponent();
             LoadDataReserva();
+            historialLogica = new HistorialLogica(connectionString);
         }
 
         // Cargar los datos existentes de Reservas en el DataGridView
@@ -82,12 +85,18 @@ namespace WinFormsApp1.Forms._3
         {
             try
             {
+
+
+
                 // Validar los valores ingresados antes de procesar la reserva
                 if (!int.TryParse(IdUsuarioReservaBox.Text, out int idUsuario) || !int.TryParse(IdLibroReservaBox.Text, out int idLibro))
                 {
                     MessageBox.Show("Por favor, ingresa un ID válido para el usuario y el libro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                
+
 
                 // Obtener los nombres y títulos asociados
                 string nombreUsuario = ObtenerNombreUsuario(idUsuario);
@@ -103,24 +112,52 @@ namespace WinFormsApp1.Forms._3
                 // Generar ID aleatorio de 8 dígitos para la reserva
                 int idReserva = GenerarIdAleatorio();
 
-                // Insertar la nueva reserva en la base de datos
-                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                // Obtener el número de copias disponibles del libro
+                int copiasDisponibles = ObtenerCopiasLibro(idLibro);
+
+                if (copiasDisponibles > 0)
                 {
-                    conn.Open();
-                    string sql = "INSERT INTO Reservas (Id, Usuario, Libro, [Fecha de reserva], [Fecha de retorno]) VALUES (@Id, @Usuario, @Libro, @FechaReserva, @FechaRetorno)";
-                    SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@Id", idReserva); // Insertamos el ID generado
-                    cmd.Parameters.AddWithValue("@Usuario", nombreUsuario);
-                    cmd.Parameters.AddWithValue("@Libro", tituloLibro);
-                    cmd.Parameters.AddWithValue("@FechaReserva", dateTimePickerReserva1.Value.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("@FechaRetorno", dateTimePickerReserva2.Value.ToString("yyyy-MM-dd"));
+                    // Insertar la nueva reserva en la base de datos
+                    using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                    {
+                        conn.Open();
+                        string sql = "INSERT INTO Reservas (Id, Usuario, Libro, [Fecha de reserva], [Fecha de retorno]) VALUES (@Id, @Usuario, @Libro, @FechaReserva, @FechaRetorno)";
+                        SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                        cmd.Parameters.AddWithValue("@Id", idReserva); // Insertamos el ID generado
+                        cmd.Parameters.AddWithValue("@Usuario", nombreUsuario);
+                        cmd.Parameters.AddWithValue("@Libro", tituloLibro);
+                        cmd.Parameters.AddWithValue("@FechaReserva", dateTimePickerReserva1.Value.ToString("yyyy-MM-dd"));
+                        cmd.Parameters.AddWithValue("@FechaRetorno", dateTimePickerReserva2.Value.ToString("yyyy-MM-dd"));
 
-                    cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // Mostrar mensaje de éxito
+                    MessageBox.Show($"Reserva agregada exitosamente con ID: {idReserva}");
+                    LoadDataReserva();  // Recargar los datos en el DataGridView
+
+
+                    // Aqui insertamos la reserva al historial
+                    Historial nuevoHistorial = new Historial(
+                        idReserva,
+                         nombreUsuario,
+                        tituloLibro,
+                        dateTimePickerReserva1.Value,
+                        dateTimePickerReserva2.Value
+                        );
+                    historialLogica.InsertarHistorial(nuevoHistorial);
+
+                    // Actualizar el número de copias del libro
+                    ActualizarCopiasLibro(idLibro, copiasDisponibles - 1);
                 }
+                else 
+                {
 
-                // Mostrar mensaje de éxito
-                MessageBox.Show($"Reserva agregada exitosamente con ID: {idReserva}");
-                LoadDataReserva();  // Recargar los datos en el DataGridView
+                    // Mostrar un mensaje de error si el libro no está disponible
+                    MessageBox.Show("El libro no está disponible en este momento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                }
             }
             catch (Exception ex)
             {
@@ -128,7 +165,32 @@ namespace WinFormsApp1.Forms._3
             }
         }
 
-        // Evento del botón "Eliminar" para eliminar la reserva seleccionada
+
+        private int ObtenerCopiasLibro(int idLibro)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "SELECT Numero_de_copias FROM Libros WHERE Id = @IdLibro";
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@IdLibro", idLibro);
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
+        private void ActualizarCopiasLibro(int idLibro, int nuevasCopias)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "UPDATE Libros SET Numero_de_copias = @NuevasCopias WHERE Id = @IdLibro";
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@IdLibro", idLibro);
+                cmd.Parameters.AddWithValue("@NuevasCopias", nuevasCopias);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         private void EliminarReservaButton_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow != null && dataGridView1.CurrentRow.Cells["Id"].Value != null)
@@ -228,6 +290,64 @@ namespace WinFormsApp1.Forms._3
                 return count > 0; // Retorna true si ya existe, false si no existe
             }
         }
+
+        private void RegistrarDevolucionButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Por favor, seleccione una reserva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                int reservaId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Id"].Value);
+                // Obtener la fecha actual
+                DateTime fechaActual = DateTime.Now;
+
+                // Obtener la fecha de retorno de la reserva
+                DateTime fechaRetorno = ObtenerFechaRetornoReserva(reservaId);
+
+                // Comparar la fecha actual con la fecha de retorno
+                string entregadaATiempo = fechaActual <= fechaRetorno ? "Sí" : "No";
+
+                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                {
+                    conn.Open();
+                    string sql = "UPDATE HistorialReservas SET FechaDevolucionReal = @FechaDevolucionReal, EntregadaATiempo = @EntregadaATiempo WHERE ReservaId = @ReservaId";
+                    SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@ReservaId", reservaId);
+                    cmd.Parameters.AddWithValue("@FechaDevolucionReal", fechaActual.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("@EntregadaATiempo", entregadaATiempo);
+                    cmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Devolución registrada exitosamente.");
+                LoadDataReserva(); // Recargar los datos en el DataGridView
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al registrar la devolución: " + ex.Message);
+            }
+        }
+
+        // Método para obtener la fecha de retorno de una reserva
+        private DateTime ObtenerFechaRetornoReserva(int reservaId)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "SELECT [Fecha de retorno] FROM Reservas WHERE Id = @ReservaId";
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@ReservaId", reservaId);
+                return Convert.ToDateTime(cmd.ExecuteScalar());
+            }
+        }
+
+
+
+
+
 
 
 

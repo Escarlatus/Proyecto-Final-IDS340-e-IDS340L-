@@ -51,6 +51,8 @@
             CopiasLabel = new Label();
             BuscarLibroBox = new TextBox();
             BuscarLibroComboBox = new ComboBox();
+            BuscarLibroLabel = new Label();
+            FiltroBuscarLibroLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -251,11 +253,31 @@
             BuscarLibroComboBox.TabIndex = 22;
             BuscarLibroComboBox.SelectedIndexChanged += BuscarLibroComboBox_SelectedIndexChanged;
             // 
+            // BuscarLibroLabel
+            // 
+            BuscarLibroLabel.AutoSize = true;
+            BuscarLibroLabel.Location = new Point(124, 206);
+            BuscarLibroLabel.Name = "BuscarLibroLabel";
+            BuscarLibroLabel.Size = new Size(63, 25);
+            BuscarLibroLabel.TabIndex = 23;
+            BuscarLibroLabel.Text = "Buscar";
+            // 
+            // FiltroBuscarLibroLabel
+            // 
+            FiltroBuscarLibroLabel.AutoSize = true;
+            FiltroBuscarLibroLabel.Location = new Point(447, 206);
+            FiltroBuscarLibroLabel.Name = "FiltroBuscarLibroLabel";
+            FiltroBuscarLibroLabel.Size = new Size(56, 25);
+            FiltroBuscarLibroLabel.TabIndex = 24;
+            FiltroBuscarLibroLabel.Text = "Filtrar";
+            // 
             // Libros
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1258, 531);
+            Controls.Add(FiltroBuscarLibroLabel);
+            Controls.Add(BuscarLibroLabel);
             Controls.Add(BuscarLibroComboBox);
             Controls.Add(BuscarLibroBox);
             Controls.Add(CopiasLabel);
@@ -312,5 +334,7 @@
         private Label CopiasLabel;
         private TextBox BuscarLibroBox;
         private ComboBox BuscarLibroComboBox;
+        private Label BuscarLibroLabel;
+        private Label FiltroBuscarLibroLabel;
     }
 }

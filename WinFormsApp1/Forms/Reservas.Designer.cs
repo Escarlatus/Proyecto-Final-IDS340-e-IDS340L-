@@ -40,6 +40,7 @@
             AgregarReservaButton = new Button();
             EliminarReservaButton = new Button();
             InicioReservaButton = new Button();
+            RegistrarDevolucionButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -122,7 +123,7 @@
             // 
             // AgregarReservaButton
             // 
-            AgregarReservaButton.Location = new Point(866, 88);
+            AgregarReservaButton.Location = new Point(850, 23);
             AgregarReservaButton.Name = "AgregarReservaButton";
             AgregarReservaButton.Size = new Size(212, 74);
             AgregarReservaButton.TabIndex = 14;
@@ -132,7 +133,7 @@
             // 
             // EliminarReservaButton
             // 
-            EliminarReservaButton.Location = new Point(866, 168);
+            EliminarReservaButton.Location = new Point(850, 103);
             EliminarReservaButton.Name = "EliminarReservaButton";
             EliminarReservaButton.Size = new Size(212, 74);
             EliminarReservaButton.TabIndex = 15;
@@ -142,7 +143,7 @@
             // 
             // InicioReservaButton
             // 
-            InicioReservaButton.Location = new Point(866, 248);
+            InicioReservaButton.Location = new Point(850, 183);
             InicioReservaButton.Name = "InicioReservaButton";
             InicioReservaButton.Size = new Size(212, 74);
             InicioReservaButton.TabIndex = 16;
@@ -150,11 +151,21 @@
             InicioReservaButton.UseVisualStyleBackColor = true;
             InicioReservaButton.Click += InicioReservaButton_Click;
             // 
+            // RegistrarDevolucionButton
+            // 
+            RegistrarDevolucionButton.Location = new Point(850, 263);
+            RegistrarDevolucionButton.Name = "RegistrarDevolucionButton";
+            RegistrarDevolucionButton.Size = new Size(212, 74);
+            RegistrarDevolucionButton.TabIndex = 17;
+            RegistrarDevolucionButton.Text = "Registrar Devolucion";
+            RegistrarDevolucionButton.UseVisualStyleBackColor = true;
+            // 
             // Reservas
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1213, 469);
+            Controls.Add(RegistrarDevolucionButton);
             Controls.Add(InicioReservaButton);
             Controls.Add(EliminarReservaButton);
             Controls.Add(AgregarReservaButton);
@@ -188,5 +199,6 @@
         private Button AgregarReservaButton;
         private Button EliminarReservaButton;
         private Button InicioReservaButton;
+        private Button RegistrarDevolucionButton;
     }
 }
