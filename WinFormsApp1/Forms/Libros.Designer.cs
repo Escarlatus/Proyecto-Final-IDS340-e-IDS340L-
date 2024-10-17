@@ -49,14 +49,15 @@
             AnoLabel = new Label();
             GeneroLabel = new Label();
             CopiasLabel = new Label();
+            BuscarLibroBox = new TextBox();
+            BuscarLibroComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Bottom;
-            dataGridView1.Location = new Point(0, 192);
+            dataGridView1.Location = new Point(2, 271);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 62;
@@ -67,7 +68,7 @@
             // 
             // AgregarLibroBotton
             // 
-            AgregarLibroBotton.Location = new Point(401, 131);
+            AgregarLibroBotton.Location = new Point(385, 137);
             AgregarLibroBotton.Name = "AgregarLibroBotton";
             AgregarLibroBotton.Size = new Size(139, 36);
             AgregarLibroBotton.TabIndex = 1;
@@ -77,63 +78,63 @@
             // 
             // IdLibroBox
             // 
-            IdLibroBox.Location = new Point(27, 32);
+            IdLibroBox.Location = new Point(11, 38);
             IdLibroBox.Name = "IdLibroBox";
             IdLibroBox.Size = new Size(196, 31);
             IdLibroBox.TabIndex = 2;
             // 
             // ISBNBox
             // 
-            ISBNBox.Location = new Point(261, 32);
+            ISBNBox.Location = new Point(245, 38);
             ISBNBox.Name = "ISBNBox";
             ISBNBox.Size = new Size(196, 31);
             ISBNBox.TabIndex = 3;
             // 
             // GeneroBox
             // 
-            GeneroBox.Location = new Point(500, 94);
+            GeneroBox.Location = new Point(484, 100);
             GeneroBox.Name = "GeneroBox";
             GeneroBox.Size = new Size(196, 31);
             GeneroBox.TabIndex = 4;
             // 
             // AñoBox
             // 
-            AñoBox.Location = new Point(261, 94);
+            AñoBox.Location = new Point(245, 100);
             AñoBox.Name = "AñoBox";
             AñoBox.Size = new Size(196, 31);
             AñoBox.TabIndex = 5;
             // 
             // EditorialBox
             // 
-            EditorialBox.Location = new Point(27, 94);
+            EditorialBox.Location = new Point(11, 100);
             EditorialBox.Name = "EditorialBox";
             EditorialBox.Size = new Size(196, 31);
             EditorialBox.TabIndex = 6;
             // 
             // AutorBox
             // 
-            AutorBox.Location = new Point(720, 32);
+            AutorBox.Location = new Point(704, 38);
             AutorBox.Name = "AutorBox";
             AutorBox.Size = new Size(196, 31);
             AutorBox.TabIndex = 7;
             // 
             // TituloBox
             // 
-            TituloBox.Location = new Point(500, 32);
+            TituloBox.Location = new Point(484, 38);
             TituloBox.Name = "TituloBox";
             TituloBox.Size = new Size(196, 31);
             TituloBox.TabIndex = 8;
             // 
             // CopiasBox
             // 
-            CopiasBox.Location = new Point(720, 94);
+            CopiasBox.Location = new Point(704, 100);
             CopiasBox.Name = "CopiasBox";
             CopiasBox.Size = new Size(196, 31);
             CopiasBox.TabIndex = 9;
             // 
             // EditarLibroButton
             // 
-            EditarLibroButton.Location = new Point(546, 131);
+            EditarLibroButton.Location = new Point(530, 137);
             EditarLibroButton.Name = "EditarLibroButton";
             EditarLibroButton.Size = new Size(139, 36);
             EditarLibroButton.TabIndex = 10;
@@ -143,7 +144,7 @@
             // 
             // EliminarLibroButton
             // 
-            EliminarLibroButton.Location = new Point(691, 131);
+            EliminarLibroButton.Location = new Point(675, 137);
             EliminarLibroButton.Name = "EliminarLibroButton";
             EliminarLibroButton.Size = new Size(139, 36);
             EliminarLibroButton.TabIndex = 11;
@@ -153,7 +154,7 @@
             // 
             // InicioLibrosButton
             // 
-            InicioLibrosButton.Location = new Point(27, 134);
+            InicioLibrosButton.Location = new Point(11, 140);
             InicioLibrosButton.Name = "InicioLibrosButton";
             InicioLibrosButton.Size = new Size(133, 33);
             InicioLibrosButton.TabIndex = 12;
@@ -164,7 +165,7 @@
             // IdLibroLabel
             // 
             IdLibroLabel.AutoSize = true;
-            IdLibroLabel.Location = new Point(96, 4);
+            IdLibroLabel.Location = new Point(80, 10);
             IdLibroLabel.Name = "IdLibroLabel";
             IdLibroLabel.Size = new Size(28, 25);
             IdLibroLabel.TabIndex = 13;
@@ -173,7 +174,7 @@
             // AutorLabel
             // 
             AutorLabel.AutoSize = true;
-            AutorLabel.Location = new Point(782, 4);
+            AutorLabel.Location = new Point(766, 10);
             AutorLabel.Name = "AutorLabel";
             AutorLabel.Size = new Size(57, 25);
             AutorLabel.TabIndex = 14;
@@ -182,7 +183,7 @@
             // TituloLabel
             // 
             TituloLabel.AutoSize = true;
-            TituloLabel.Location = new Point(562, 4);
+            TituloLabel.Location = new Point(546, 10);
             TituloLabel.Name = "TituloLabel";
             TituloLabel.Size = new Size(56, 25);
             TituloLabel.TabIndex = 15;
@@ -191,7 +192,7 @@
             // ISBNLabel
             // 
             ISBNLabel.AutoSize = true;
-            ISBNLabel.Location = new Point(333, 4);
+            ISBNLabel.Location = new Point(317, 10);
             ISBNLabel.Name = "ISBNLabel";
             ISBNLabel.Size = new Size(50, 25);
             ISBNLabel.TabIndex = 16;
@@ -200,7 +201,7 @@
             // EditorialLabel
             // 
             EditorialLabel.AutoSize = true;
-            EditorialLabel.Location = new Point(73, 66);
+            EditorialLabel.Location = new Point(57, 72);
             EditorialLabel.Name = "EditorialLabel";
             EditorialLabel.Size = new Size(76, 25);
             EditorialLabel.TabIndex = 17;
@@ -209,7 +210,7 @@
             // AnoLabel
             // 
             AnoLabel.AutoSize = true;
-            AnoLabel.Location = new Point(273, 66);
+            AnoLabel.Location = new Point(257, 72);
             AnoLabel.Name = "AnoLabel";
             AnoLabel.Size = new Size(165, 25);
             AnoLabel.TabIndex = 18;
@@ -218,7 +219,7 @@
             // GeneroLabel
             // 
             GeneroLabel.AutoSize = true;
-            GeneroLabel.Location = new Point(562, 66);
+            GeneroLabel.Location = new Point(546, 72);
             GeneroLabel.Name = "GeneroLabel";
             GeneroLabel.Size = new Size(69, 25);
             GeneroLabel.TabIndex = 19;
@@ -227,17 +228,36 @@
             // CopiasLabel
             // 
             CopiasLabel.AutoSize = true;
-            CopiasLabel.Location = new Point(738, 66);
+            CopiasLabel.Location = new Point(722, 72);
             CopiasLabel.Name = "CopiasLabel";
             CopiasLabel.Size = new Size(158, 25);
             CopiasLabel.TabIndex = 20;
             CopiasLabel.Text = "Numero de copias";
             // 
+            // BuscarLibroBox
+            // 
+            BuscarLibroBox.Location = new Point(124, 234);
+            BuscarLibroBox.Name = "BuscarLibroBox";
+            BuscarLibroBox.Size = new Size(317, 31);
+            BuscarLibroBox.TabIndex = 21;
+            BuscarLibroBox.TextChanged += BuscarLibroBox_TextChanged;
+            // 
+            // BuscarLibroComboBox
+            // 
+            BuscarLibroComboBox.FormattingEnabled = true;
+            BuscarLibroComboBox.Location = new Point(447, 234);
+            BuscarLibroComboBox.Name = "BuscarLibroComboBox";
+            BuscarLibroComboBox.Size = new Size(155, 33);
+            BuscarLibroComboBox.TabIndex = 22;
+            BuscarLibroComboBox.SelectedIndexChanged += BuscarLibroComboBox_SelectedIndexChanged;
+            // 
             // Libros
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1253, 450);
+            ClientSize = new Size(1258, 531);
+            Controls.Add(BuscarLibroComboBox);
+            Controls.Add(BuscarLibroBox);
             Controls.Add(CopiasLabel);
             Controls.Add(GeneroLabel);
             Controls.Add(AnoLabel);
@@ -290,5 +310,7 @@
         private Label AnoLabel;
         private Label GeneroLabel;
         private Label CopiasLabel;
+        private TextBox BuscarLibroBox;
+        private ComboBox BuscarLibroComboBox;
     }
 }

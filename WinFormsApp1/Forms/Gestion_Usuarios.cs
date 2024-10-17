@@ -24,6 +24,15 @@ namespace WinFormsApp1.Forms
             LoadDataUsuarios();
             string connectionString = "Data Source=C:\\Users\\Asus\\source\\repos\\WinFormsApp1\\WinFormsApp1\\Files\\Prueba.db;";
             usuarioLogica = new UsuarioLogica(connectionString);
+
+            //Aqui agregamos los items del combo box
+            BuscarComboBox.Items.Add("Nombre");
+            BuscarComboBox.Items.Add("Apellido");
+            BuscarComboBox.Items.Add("Email");
+            BuscarComboBox.Items.Add("Teléfono");
+
+
+
         }
 
         private void LoadDataUsuarios()
@@ -194,6 +203,50 @@ namespace WinFormsApp1.Forms
             {
                 MessageBox.Show("Error al eliminar el libro: " + ex.Message);
             }
+        }
+
+        private void BuscarUsuarioBox_TextChanged(object sender, EventArgs e)
+        {
+
+            string connectionString = "Data Source=C:\\Users\\Asus\\source\\repos\\WinFormsApp1\\WinFormsApp1\\Files\\Prueba.db;";
+            string terminoBusqueda = BuscarUsuarioBox.Text;
+            string criterioBusqueda = BuscarComboBox.SelectedItem?.ToString();
+
+            string sql = "SELECT * FROM Usuarios WHERE ";
+
+            switch (criterioBusqueda)
+            {
+                case "Nombre":
+                    sql += "Nombre LIKE @terminoBusqueda";
+                    break;
+                case "Apellido":
+                    sql += "Apellido LIKE @terminoBusqueda";
+                    break;
+                case "Email":
+                    sql += "Email LIKE @terminoBusqueda";
+                    break;
+                case "Teléfono":
+                    sql += "Telefono LIKE @terminoBusqueda";
+                    break;
+                default:
+                    sql += "Nombre LIKE @terminoBusqueda OR Apellido LIKE @terminoBusqueda"; // Búsqueda por nombre y apellido por defecto
+                    break;
+            }
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, conn);
+                adapter.SelectCommand.Parameters.AddWithValue("@terminoBusqueda", "%" + terminoBusqueda + "%");
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dataGridViewUsuarios.DataSource = dt;
+            }
+        }
+
+        private void BuscarComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }

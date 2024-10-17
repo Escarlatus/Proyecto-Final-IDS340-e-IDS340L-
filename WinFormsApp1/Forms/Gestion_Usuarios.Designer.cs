@@ -43,18 +43,22 @@
             AgregaUsuarioButton = new Button();
             EditarUsuarioButton = new Button();
             EliminarUsuarioButton = new Button();
+            BuscarUsuarioBox = new TextBox();
+            BuscarComboBox = new ComboBox();
+            BuscarLabel = new Label();
+            FiltroLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsuarios).BeginInit();
             SuspendLayout();
             // 
             // dataGridViewUsuarios
             // 
             dataGridViewUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewUsuarios.Location = new Point(374, 22);
+            dataGridViewUsuarios.Location = new Point(363, 111);
             dataGridViewUsuarios.Name = "dataGridViewUsuarios";
             dataGridViewUsuarios.ReadOnly = true;
             dataGridViewUsuarios.RowHeadersWidth = 62;
             dataGridViewUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewUsuarios.Size = new Size(814, 429);
+            dataGridViewUsuarios.Size = new Size(814, 340);
             dataGridViewUsuarios.TabIndex = 0;
             dataGridViewUsuarios.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -178,11 +182,50 @@
             EliminarUsuarioButton.UseVisualStyleBackColor = true;
             EliminarUsuarioButton.Click += EliminarUsuarioButton_Click;
             // 
+            // BuscarUsuarioBox
+            // 
+            BuscarUsuarioBox.Location = new Point(363, 64);
+            BuscarUsuarioBox.Name = "BuscarUsuarioBox";
+            BuscarUsuarioBox.Size = new Size(446, 31);
+            BuscarUsuarioBox.TabIndex = 17;
+            BuscarUsuarioBox.TextChanged += BuscarUsuarioBox_TextChanged;
+            // 
+            // BuscarComboBox
+            // 
+            BuscarComboBox.FormattingEnabled = true;
+            BuscarComboBox.Location = new Point(815, 64);
+            BuscarComboBox.Name = "BuscarComboBox";
+            BuscarComboBox.Size = new Size(182, 33);
+            BuscarComboBox.TabIndex = 18;
+            BuscarComboBox.SelectedIndexChanged += BuscarComboBox_SelectedIndexChanged;
+            // 
+            // BuscarLabel
+            // 
+            BuscarLabel.AutoSize = true;
+            BuscarLabel.Location = new Point(363, 36);
+            BuscarLabel.Name = "BuscarLabel";
+            BuscarLabel.Size = new Size(63, 25);
+            BuscarLabel.TabIndex = 19;
+            BuscarLabel.Text = "Buscar";
+            // 
+            // FiltroLabel
+            // 
+            FiltroLabel.AutoSize = true;
+            FiltroLabel.Location = new Point(815, 36);
+            FiltroLabel.Name = "FiltroLabel";
+            FiltroLabel.Size = new Size(56, 25);
+            FiltroLabel.TabIndex = 20;
+            FiltroLabel.Text = "Filtrar";
+            // 
             // Gestion_Usuarios
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1208, 476);
+            Controls.Add(FiltroLabel);
+            Controls.Add(BuscarLabel);
+            Controls.Add(BuscarComboBox);
+            Controls.Add(BuscarUsuarioBox);
             Controls.Add(EliminarUsuarioButton);
             Controls.Add(EditarUsuarioButton);
             Controls.Add(AgregaUsuarioButton);
@@ -223,5 +266,9 @@
         private Button AgregaUsuarioButton;
         private Button EditarUsuarioButton;
         private Button EliminarUsuarioButton;
+        private TextBox BuscarUsuarioBox;
+        private ComboBox BuscarComboBox;
+        private Label BuscarLabel;
+        private Label FiltroLabel;
     }
 }

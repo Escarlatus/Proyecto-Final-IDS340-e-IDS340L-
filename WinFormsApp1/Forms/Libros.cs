@@ -25,6 +25,16 @@ namespace WinFormsApp1.Forms
             string connectionString = "Data Source=C:\\Users\\Asus\\source\\repos\\WinFormsApp1\\WinFormsApp1\\Files\\Prueba.db;";
             libroLogica = new LibroLogica(connectionString);
             ActualizarLibrosDataGridView();
+
+            //Aqui agregamos los items del combo box
+            BuscarLibroComboBox.Items.Add("Id");
+            BuscarLibroComboBox.Items.Add("ISBN");
+            BuscarLibroComboBox.Items.Add("Titulo");
+            BuscarLibroComboBox.Items.Add("Autor");
+            BuscarLibroComboBox.Items.Add("Editorial");
+            BuscarLibroComboBox.Items.Add("Año_de_publicacion");
+            BuscarLibroComboBox.Items.Add("Genero");
+
         }
 
         private void LoadDataLibros()
@@ -45,7 +55,7 @@ namespace WinFormsApp1.Forms
 
             // Asigna el DataTable al DataGridView
             dataGridView1.DataSource = dt;
-           
+
             // Cierra la conexión
             conn.Close();
         }
@@ -147,7 +157,7 @@ namespace WinFormsApp1.Forms
             string genero = GeneroBox.Text;
             int numero_de_copias;
 
-            
+
             if (!int.TryParse(CopiasBox.Text, out numero_de_copias))
             {
                 MessageBox.Show("Por favor, ingrese un número válido de copias.");
@@ -155,7 +165,7 @@ namespace WinFormsApp1.Forms
             }
 
 
-            Libro libro = new Libro (isbn, titulo, autor, editorial, año_de_publicacion, genero, numero_de_copias);
+            Libro libro = new Libro(isbn, titulo, autor, editorial, año_de_publicacion, genero, numero_de_copias);
 
             try
             {
@@ -170,7 +180,7 @@ namespace WinFormsApp1.Forms
 
             }
 
-            
+
 
 
 
@@ -199,7 +209,56 @@ namespace WinFormsApp1.Forms
             }
         }
 
+        private void BuscarLibroBox_TextChanged(object sender, EventArgs e)
+        {
+            string connectionString = "Data Source=C:\\Users\\Asus\\source\\repos\\WinFormsApp1\\WinFormsApp1\\Files\\Prueba.db;";
+            string terminoBusqueda = BuscarLibroBox.Text;
+            string criterioBusqueda = BuscarLibroComboBox.SelectedItem?.ToString();
 
+            string sql = "SELECT * FROM Libros WHERE ";
 
+            switch (criterioBusqueda)
+            {
+                case "Id":
+                    sql += "CAST(Id AS TEXT) LIKE @terminoBusqueda";
+                    break;
+                case "ISBN":
+                    sql += "ISBN LIKE @terminoBusqueda";
+                    break;
+                case "Titulo":
+                    sql += "Titulo LIKE @terminoBusqueda";
+                    break;
+                case "Autor":
+                    sql += "Autor LIKE @terminoBusqueda";
+                    break;
+                case "Editorial":
+                    sql += "Editorial LIKE @terminoBusqueda";
+                    break;
+                case "Año_de_publicacion":
+                    sql += "Año_de_publicacion LIKE @terminoBusqueda";
+                    break;
+                case "Genero":
+                    sql += "Genero LIKE @terminoBusqueda";
+                    break;
+                default:
+                    sql += "CAST(Id AS TEXT) LIKE @terminoBusqueda OR Titulo LIKE @terminoBusqueda"; // Búsqueda por id y titulo por defecto
+                    break;
+            }
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, conn);
+                adapter.SelectCommand.Parameters.AddWithValue("@terminoBusqueda", "%" + terminoBusqueda + "%");
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dataGridView1.DataSource = dt;
+            }
+        }
+
+        private void BuscarLibroComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
