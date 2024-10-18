@@ -56,7 +56,7 @@ namespace WinFormsApp1.Forms
 
         private void Consultasbutton_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Como explique en el .readme, no supe como realizar el Reporte ");
         }
     }
 }

@@ -43,7 +43,7 @@
             dataGridView1.Location = new Point(12, 150);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(1065, 321);
+            dataGridView1.Size = new Size(1264, 321);
             dataGridView1.TabIndex = 0;
             // 
             // BuscarHistorialBox
@@ -52,7 +52,7 @@
             BuscarHistorialBox.Name = "BuscarHistorialBox";
             BuscarHistorialBox.Size = new Size(286, 31);
             BuscarHistorialBox.TabIndex = 1;
-            BuscarHistorialBox.TextChanged += this.BuscarHistorialBox_TextChanged_1;
+            BuscarHistorialBox.TextChanged += BuscarHistorialBox_TextChanged_1;
             // 
             // BuscarHistorialComboBox
             // 
@@ -95,7 +95,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1089, 502);
+            ClientSize = new Size(1288, 502);
             Controls.Add(VolverReservaButton);
             Controls.Add(FiltrarHistoriaLabel);
             Controls.Add(BuscarHistorialLabel);
