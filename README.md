@@ -18,7 +18,7 @@ Este es mi proyecto final para las materias **IDS340 e IDS340L**.
 Este proyecto ha sido desarrollado en **Windows Forms utilizando C#** y funciona con una **base de datos SQLite**. A continuación, se explican los módulos y funcionalidades principales del programa.
 
 **Nota:**  
-Si estás leyendo este archivo desde el `MessageBox` que aparece al presionar el botón de **Reportes**, ve directamente aquí 👉 [Consultas y reportes](#consultas-y-reportes).  
+Si estás leyendo este archivo debido el `MessageBox` que aparece al presionar el botón de **Reportes**, ve directamente aquí 👉 [Consultas y reportes](#consultas-y-reportes).  
 
 ---
 
