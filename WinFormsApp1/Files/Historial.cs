@@ -15,7 +15,7 @@ namespace WinFormsApp1.Files
         public DateTime FechaReserva { get; set; }
         public DateTime FechaRetorno { get; set; }
         public DateTime? FechaDevolucionReal { get; set; }  // Puede ser null si no se ha devuelto
-        public string EntregadaATiempo { get; set; }  // Solo tendra 2 valores "Sí" o "No"
+        public string EntregaATiempo { get; set; }  // Solo tendra 2 valores "Sí" o "No"
 
         public Historial(int reservaId, string usuario, string libro, DateTime fechaReserva, DateTime fechaRetorno)
         {
@@ -24,7 +24,7 @@ namespace WinFormsApp1.Files
             Libro = libro;
             FechaReserva = fechaReserva;
             FechaRetorno = fechaRetorno;
-            EntregadaATiempo = "No";  // Por defecto, la entrega no es a tiempo hasta que se registre la devolución
+            EntregaATiempo = "No";  // Por defecto, la entrega no es a tiempo hasta que se registre la devolución
         }
     }
 }

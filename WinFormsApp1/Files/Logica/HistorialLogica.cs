@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using WinFormsApp1.Files;
+using WinFormsApp1.Forms;
+using WinFormsApp1.Files.Logica;
 
 namespace WinFormsApp1.Files.Logica
 {
@@ -21,8 +24,8 @@ namespace WinFormsApp1.Files.Logica
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
             {
                 conn.Open();
-                string sql = "INSERT INTO HistorialReservas (ReservaId, Usuario, Libro, FechaReserva, FechaRetorno, EntregadaATiempo) " +
-                             "VALUES (@ReservaId, @Usuario, @Libro, @FechaReserva, @FechaRetorno, @EntregadaATiempo)";
+                string sql = "INSERT INTO HistorialReservas (ReservaId, Usuario, Libro, FechaReserva, FechaRetorno, EntregaATiempo) " +  //  <--  Corrección aquí
+                             "VALUES (@ReservaId, @Usuario, @Libro, @FechaReserva, @FechaRetorno, @EntregaATiempo)";  //  <--  Corrección aquí
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@ReservaId", historial.ReservaId);
@@ -30,7 +33,7 @@ namespace WinFormsApp1.Files.Logica
                     cmd.Parameters.AddWithValue("@Libro", historial.Libro);
                     cmd.Parameters.AddWithValue("@FechaReserva", historial.FechaReserva.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("@FechaRetorno", historial.FechaRetorno.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("@EntregadaATiempo", historial.EntregadaATiempo);
+                    cmd.Parameters.AddWithValue("@EntregaATiempo", historial.EntregaATiempo);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -41,17 +44,21 @@ namespace WinFormsApp1.Files.Logica
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
             {
                 conn.Open();
-                string sql = "UPDATE HistorialReservas SET FechaDevolucionReal = @FechaDevolucionReal, EntregadaATiempo = @EntregadaATiempo WHERE ReservaId = @ReservaId";
+                string sql = "UPDATE HistorialReservas SET FechaDevolucionReal = @FechaDevolucionReal, EntregaATiempo = @EntregaATiempo WHERE ReservaId = @ReservaId";
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@ReservaId", historial.ReservaId);
                     cmd.Parameters.AddWithValue("@FechaDevolucionReal", historial.FechaDevolucionReal?.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("@EntregadaATiempo", historial.EntregadaATiempo);
+                    cmd.Parameters.AddWithValue("@EntregaATiempo", historial.EntregaATiempo);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-       
+        
+
+
+
+
     }
 }

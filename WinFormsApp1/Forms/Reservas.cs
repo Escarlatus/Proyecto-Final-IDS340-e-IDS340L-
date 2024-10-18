@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using WinFormsApp1.Files.Logica;
 using WinFormsApp1.Files;
 
+
 namespace WinFormsApp1.Forms._3
 {
     public partial class Reservas : Form
@@ -36,7 +37,7 @@ namespace WinFormsApp1.Forms._3
                 adapter.Fill(dt);
                 dataGridView1.DataSource = dt;
 
-                // Asegúrate de que la columna "Id" esté visible
+                // Asegúra de que la columna "Id" esté visible
                 if (dataGridView1.Columns["Id"] != null)
                 {
                     dataGridView1.Columns["Id"].Visible = true; // Si estaba oculta, mostrarla
@@ -95,7 +96,7 @@ namespace WinFormsApp1.Forms._3
                     return;
                 }
 
-                
+
 
 
                 // Obtener los nombres y títulos asociados
@@ -138,19 +139,13 @@ namespace WinFormsApp1.Forms._3
 
 
                     // Aqui insertamos la reserva al historial
-                    Historial nuevoHistorial = new Historial(
-                        idReserva,
-                         nombreUsuario,
-                        tituloLibro,
-                        dateTimePickerReserva1.Value,
-                        dateTimePickerReserva2.Value
-                        );
+                    WinFormsApp1.Files.Historial nuevoHistorial = new Historial(idReserva, nombreUsuario, tituloLibro, dateTimePickerReserva1.Value, dateTimePickerReserva2.Value);
                     historialLogica.InsertarHistorial(nuevoHistorial);
 
                     // Actualizar el número de copias del libro
                     ActualizarCopiasLibro(idLibro, copiasDisponibles - 1);
                 }
-                else 
+                else
                 {
 
                     // Mostrar un mensaje de error si el libro no está disponible
@@ -291,7 +286,7 @@ namespace WinFormsApp1.Forms._3
             }
         }
 
-        private void RegistrarDevolucionButton_Click(object sender, EventArgs e)
+        private void RegistrarDevolucionButton_Click_1(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0)
             {
@@ -301,24 +296,28 @@ namespace WinFormsApp1.Forms._3
 
             try
             {
-                int reservaId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Id"].Value);
+                // Obtener el Id de la reserva de la tabla Reservas
+                int idReserva = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Id"].Value);
+
                 // Obtener la fecha actual
                 DateTime fechaActual = DateTime.Now;
 
                 // Obtener la fecha de retorno de la reserva
-                DateTime fechaRetorno = ObtenerFechaRetornoReserva(reservaId);
+                DateTime fechaRetorno = ObtenerFechaRetornoReserva(idReserva);
 
                 // Comparar la fecha actual con la fecha de retorno
-                string entregadaATiempo = fechaActual <= fechaRetorno ? "Sí" : "No";
+                string entregaATiempo = fechaActual <= fechaRetorno ? "Sí" : "No";
 
                 using (SQLiteConnection conn = new SQLiteConnection(connectionString))
                 {
                     conn.Open();
-                    string sql = "UPDATE HistorialReservas SET FechaDevolucionReal = @FechaDevolucionReal, EntregadaATiempo = @EntregadaATiempo WHERE ReservaId = @ReservaId";
+                    // Actualizar la tabla HistorialReservas usando el idReserva como ReservaId
+                    string sql = "UPDATE HistorialReservas SET FechaDevolucionReal = @FechaDevolucionReal, EntregaATiempo = @EntregaATiempo WHERE ReservaId = @idReserva";
                     SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@ReservaId", reservaId);
+                    cmd.Parameters.AddWithValue("@idReserva", idReserva); // Usar el idReserva como ReservaId
                     cmd.Parameters.AddWithValue("@FechaDevolucionReal", fechaActual.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("@EntregadaATiempo", entregadaATiempo);
+                    cmd.Parameters.AddWithValue("@EntregaATiempo", entregaATiempo);
+                    cmd.Parameters.AddWithValue("@EntregadaATiempo", fechaActual <= fechaRetorno ? "Sí" : "No");
                     cmd.ExecuteNonQuery();
                 }
 
@@ -344,13 +343,12 @@ namespace WinFormsApp1.Forms._3
             }
         }
 
-
-
-
-
-
-
-
+        private void HistorialReservasButton_Click(object sender, EventArgs e)
+        {
+            HistorialReserva historialReserva = new HistorialReserva();
+            historialReserva.Show();
+            this.Close();
+        }
     }
 }
 

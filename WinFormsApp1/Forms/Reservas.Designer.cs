@@ -41,6 +41,7 @@
             EliminarReservaButton = new Button();
             InicioReservaButton = new Button();
             RegistrarDevolucionButton = new Button();
+            HistorialReservasButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -159,12 +160,24 @@
             RegistrarDevolucionButton.TabIndex = 17;
             RegistrarDevolucionButton.Text = "Registrar Devolucion";
             RegistrarDevolucionButton.UseVisualStyleBackColor = true;
+            RegistrarDevolucionButton.Click += RegistrarDevolucionButton_Click_1;
+            // 
+            // HistorialReservasButton
+            // 
+            HistorialReservasButton.Location = new Point(850, 343);
+            HistorialReservasButton.Name = "HistorialReservasButton";
+            HistorialReservasButton.Size = new Size(212, 74);
+            HistorialReservasButton.TabIndex = 18;
+            HistorialReservasButton.Text = "Historial";
+            HistorialReservasButton.UseVisualStyleBackColor = true;
+            HistorialReservasButton.Click += HistorialReservasButton_Click;
             // 
             // Reservas
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1213, 469);
+            Controls.Add(HistorialReservasButton);
             Controls.Add(RegistrarDevolucionButton);
             Controls.Add(InicioReservaButton);
             Controls.Add(EliminarReservaButton);
@@ -200,5 +213,6 @@
         private Button EliminarReservaButton;
         private Button InicioReservaButton;
         private Button RegistrarDevolucionButton;
+        private Button HistorialReservasButton;
     }
 }
