@@ -30,7 +30,6 @@
         {
             dataGridView1 = new DataGridView();
             AgregarLibroBotton = new Button();
-            IdLibroBox = new TextBox();
             ISBNBox = new TextBox();
             GeneroBox = new TextBox();
             AñoBox = new TextBox();
@@ -41,7 +40,6 @@
             EditarLibroButton = new Button();
             EliminarLibroButton = new Button();
             InicioLibrosButton = new Button();
-            IdLibroLabel = new Label();
             AutorLabel = new Label();
             TituloLabel = new Label();
             ISBNLabel = new Label();
@@ -78,16 +76,9 @@
             AgregarLibroBotton.UseVisualStyleBackColor = true;
             AgregarLibroBotton.Click += AgregarLibroBotton_Click;
             // 
-            // IdLibroBox
-            // 
-            IdLibroBox.Location = new Point(11, 38);
-            IdLibroBox.Name = "IdLibroBox";
-            IdLibroBox.Size = new Size(196, 31);
-            IdLibroBox.TabIndex = 2;
-            // 
             // ISBNBox
             // 
-            ISBNBox.Location = new Point(245, 38);
+            ISBNBox.Location = new Point(11, 38);
             ISBNBox.Name = "ISBNBox";
             ISBNBox.Size = new Size(196, 31);
             ISBNBox.TabIndex = 3;
@@ -115,14 +106,14 @@
             // 
             // AutorBox
             // 
-            AutorBox.Location = new Point(704, 38);
+            AutorBox.Location = new Point(484, 38);
             AutorBox.Name = "AutorBox";
             AutorBox.Size = new Size(196, 31);
             AutorBox.TabIndex = 7;
             // 
             // TituloBox
             // 
-            TituloBox.Location = new Point(484, 38);
+            TituloBox.Location = new Point(245, 38);
             TituloBox.Name = "TituloBox";
             TituloBox.Size = new Size(196, 31);
             TituloBox.TabIndex = 8;
@@ -164,19 +155,10 @@
             InicioLibrosButton.UseVisualStyleBackColor = true;
             InicioLibrosButton.Click += InicioLibrosButton_Click;
             // 
-            // IdLibroLabel
-            // 
-            IdLibroLabel.AutoSize = true;
-            IdLibroLabel.Location = new Point(80, 10);
-            IdLibroLabel.Name = "IdLibroLabel";
-            IdLibroLabel.Size = new Size(28, 25);
-            IdLibroLabel.TabIndex = 13;
-            IdLibroLabel.Text = "Id";
-            // 
             // AutorLabel
             // 
             AutorLabel.AutoSize = true;
-            AutorLabel.Location = new Point(766, 10);
+            AutorLabel.Location = new Point(546, 10);
             AutorLabel.Name = "AutorLabel";
             AutorLabel.Size = new Size(57, 25);
             AutorLabel.TabIndex = 14;
@@ -185,7 +167,7 @@
             // TituloLabel
             // 
             TituloLabel.AutoSize = true;
-            TituloLabel.Location = new Point(546, 10);
+            TituloLabel.Location = new Point(307, 10);
             TituloLabel.Name = "TituloLabel";
             TituloLabel.Size = new Size(56, 25);
             TituloLabel.TabIndex = 15;
@@ -194,7 +176,7 @@
             // ISBNLabel
             // 
             ISBNLabel.AutoSize = true;
-            ISBNLabel.Location = new Point(317, 10);
+            ISBNLabel.Location = new Point(83, 10);
             ISBNLabel.Name = "ISBNLabel";
             ISBNLabel.Size = new Size(50, 25);
             ISBNLabel.TabIndex = 16;
@@ -287,7 +269,6 @@
             Controls.Add(ISBNLabel);
             Controls.Add(TituloLabel);
             Controls.Add(AutorLabel);
-            Controls.Add(IdLibroLabel);
             Controls.Add(InicioLibrosButton);
             Controls.Add(EliminarLibroButton);
             Controls.Add(EditarLibroButton);
@@ -298,7 +279,6 @@
             Controls.Add(AñoBox);
             Controls.Add(GeneroBox);
             Controls.Add(ISBNBox);
-            Controls.Add(IdLibroBox);
             Controls.Add(AgregarLibroBotton);
             Controls.Add(dataGridView1);
             Name = "Libros";
@@ -313,7 +293,6 @@
 
         private DataGridView dataGridView1;
         private Button AgregarLibroBotton;
-        private TextBox IdLibroBox;
         private TextBox ISBNBox;
         private TextBox GeneroBox;
         private TextBox AñoBox;
@@ -324,7 +303,6 @@
         private Button EditarLibroButton;
         private Button EliminarLibroButton;
         private Button InicioLibrosButton;
-        private Label IdLibroLabel;
         private Label AutorLabel;
         private Label TituloLabel;
         private Label ISBNLabel;
