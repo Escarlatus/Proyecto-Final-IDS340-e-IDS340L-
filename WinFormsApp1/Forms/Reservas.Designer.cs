@@ -42,13 +42,17 @@
             InicioReservaButton = new Button();
             RegistrarDevolucionButton = new Button();
             HistorialReservasButton = new Button();
+            BuscarReservaBox = new TextBox();
+            BuscarReservaComboBox = new ComboBox();
+            BuscarReservaLabel = new Label();
+            FiltroReservaLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // IdDeUsuarioReservaLabel
             // 
             IdDeUsuarioReservaLabel.AutoSize = true;
-            IdDeUsuarioReservaLabel.Location = new Point(34, 39);
+            IdDeUsuarioReservaLabel.Location = new Point(39, 17);
             IdDeUsuarioReservaLabel.Name = "IdDeUsuarioReservaLabel";
             IdDeUsuarioReservaLabel.Size = new Size(120, 25);
             IdDeUsuarioReservaLabel.TabIndex = 1;
@@ -58,7 +62,7 @@
             // IdLibroReservaLabel
             // 
             IdLibroReservaLabel.AutoSize = true;
-            IdLibroReservaLabel.Location = new Point(200, 39);
+            IdLibroReservaLabel.Location = new Point(186, 16);
             IdLibroReservaLabel.Name = "IdLibroReservaLabel";
             IdLibroReservaLabel.Size = new Size(98, 25);
             IdLibroReservaLabel.TabIndex = 3;
@@ -67,7 +71,7 @@
             // FechaDeReservaLabel
             // 
             FechaDeReservaLabel.AutoSize = true;
-            FechaDeReservaLabel.Location = new Point(343, 49);
+            FechaDeReservaLabel.Location = new Point(346, 15);
             FechaDeReservaLabel.Name = "FechaDeReservaLabel";
             FechaDeReservaLabel.Size = new Size(147, 25);
             FechaDeReservaLabel.TabIndex = 5;
@@ -75,7 +79,7 @@
             // 
             // IdUsuarioReservaBox
             // 
-            IdUsuarioReservaBox.Location = new Point(34, 79);
+            IdUsuarioReservaBox.Location = new Point(37, 45);
             IdUsuarioReservaBox.Name = "IdUsuarioReservaBox";
             IdUsuarioReservaBox.Size = new Size(122, 31);
             IdUsuarioReservaBox.TabIndex = 6;
@@ -83,7 +87,7 @@
             // 
             // IdLibroReservaBox
             // 
-            IdLibroReservaBox.Location = new Point(183, 78);
+            IdLibroReservaBox.Location = new Point(186, 44);
             IdLibroReservaBox.Name = "IdLibroReservaBox";
             IdLibroReservaBox.Size = new Size(122, 31);
             IdLibroReservaBox.TabIndex = 8;
@@ -91,7 +95,7 @@
             // FechaDeRetornoLabel
             // 
             FechaDeRetornoLabel.AutoSize = true;
-            FechaDeRetornoLabel.Location = new Point(492, 48);
+            FechaDeRetornoLabel.Location = new Point(495, 14);
             FechaDeRetornoLabel.Name = "FechaDeRetornoLabel";
             FechaDeRetornoLabel.Size = new Size(150, 25);
             FechaDeRetornoLabel.TabIndex = 10;
@@ -100,14 +104,14 @@
             // 
             // dateTimePickerReserva1
             // 
-            dateTimePickerReserva1.Location = new Point(337, 77);
+            dateTimePickerReserva1.Location = new Point(340, 43);
             dateTimePickerReserva1.Name = "dateTimePickerReserva1";
             dateTimePickerReserva1.Size = new Size(153, 31);
             dateTimePickerReserva1.TabIndex = 11;
             // 
             // dateTimePickerReserva2
             // 
-            dateTimePickerReserva2.Location = new Point(496, 78);
+            dateTimePickerReserva2.Location = new Point(499, 44);
             dateTimePickerReserva2.Name = "dateTimePickerReserva2";
             dateTimePickerReserva2.Size = new Size(153, 31);
             dateTimePickerReserva2.TabIndex = 11;
@@ -172,11 +176,50 @@
             HistorialReservasButton.UseVisualStyleBackColor = true;
             HistorialReservasButton.Click += HistorialReservasButton_Click;
             // 
+            // BuscarReservaBox
+            // 
+            BuscarReservaBox.Location = new Point(39, 146);
+            BuscarReservaBox.Name = "BuscarReservaBox";
+            BuscarReservaBox.Size = new Size(290, 31);
+            BuscarReservaBox.TabIndex = 19;
+            BuscarReservaBox.TextChanged += BuscarReservaBox_TextChanged;
+            // 
+            // BuscarReservaComboBox
+            // 
+            BuscarReservaComboBox.FormattingEnabled = true;
+            BuscarReservaComboBox.Location = new Point(335, 144);
+            BuscarReservaComboBox.Name = "BuscarReservaComboBox";
+            BuscarReservaComboBox.Size = new Size(133, 33);
+            BuscarReservaComboBox.TabIndex = 20;
+            BuscarReservaComboBox.SelectedIndexChanged += BuscarReservaComboBox_SelectedIndexChanged;
+            // 
+            // BuscarReservaLabel
+            // 
+            BuscarReservaLabel.AutoSize = true;
+            BuscarReservaLabel.Location = new Point(39, 118);
+            BuscarReservaLabel.Name = "BuscarReservaLabel";
+            BuscarReservaLabel.Size = new Size(214, 25);
+            BuscarReservaLabel.TabIndex = 21;
+            BuscarReservaLabel.Text = "Buscar en reservas activas";
+            // 
+            // FiltroReservaLabel
+            // 
+            FiltroReservaLabel.AutoSize = true;
+            FiltroReservaLabel.Location = new Point(335, 116);
+            FiltroReservaLabel.Name = "FiltroReservaLabel";
+            FiltroReservaLabel.Size = new Size(52, 25);
+            FiltroReservaLabel.TabIndex = 22;
+            FiltroReservaLabel.Text = "Filtro";
+            // 
             // Reservas
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1213, 469);
+            Controls.Add(FiltroReservaLabel);
+            Controls.Add(BuscarReservaLabel);
+            Controls.Add(BuscarReservaComboBox);
+            Controls.Add(BuscarReservaBox);
             Controls.Add(HistorialReservasButton);
             Controls.Add(RegistrarDevolucionButton);
             Controls.Add(InicioReservaButton);
@@ -214,5 +257,9 @@
         private Button InicioReservaButton;
         private Button RegistrarDevolucionButton;
         private Button HistorialReservasButton;
+        private TextBox BuscarReservaBox;
+        private ComboBox BuscarReservaComboBox;
+        private Label BuscarReservaLabel;
+        private Label FiltroReservaLabel;
     }
 }

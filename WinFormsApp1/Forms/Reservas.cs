@@ -23,6 +23,14 @@ namespace WinFormsApp1.Forms._3
             InitializeComponent();
             LoadDataReserva();
             historialLogica = new HistorialLogica(connectionString);
+
+            //Aqui agregamos los items del combo box
+            BuscarReservaComboBox.Items.Add("Id");
+            BuscarReservaComboBox.Items.Add("Usuario");
+            BuscarReservaComboBox.Items.Add("Libro");
+            BuscarReservaComboBox.Items.Add("Fecha de reserva");
+            BuscarReservaComboBox.Items.Add("Fecha de retorno");
+
         }
 
         // Cargar los datos existentes de Reservas en el DataGridView
@@ -348,6 +356,52 @@ namespace WinFormsApp1.Forms._3
             HistorialReserva historialReserva = new HistorialReserva();
             historialReserva.Show();
             this.Close();
+        }
+
+        private void BuscarReservaBox_TextChanged(object sender, EventArgs e)
+        {
+            string connectionString = "Data Source=C:\\Users\\Asus\\source\\repos\\WinFormsApp1\\WinFormsApp1\\Files\\Prueba.db;";
+            string terminoBusqueda = BuscarReservaBox.Text;
+            string criterioBusqueda = BuscarReservaComboBox.SelectedItem?.ToString();
+
+            string sql = "SELECT * FROM Reservas WHERE ";
+
+            switch (criterioBusqueda)
+            {
+                case "Id":
+                    sql += "CAST(Id AS TEXT) LIKE @terminoBusqueda";
+                    break;
+                case "Usuario":
+                    sql += "Usuario LIKE @terminoBusqueda";
+                    break;
+                case "Libro":
+                    sql += "Libro LIKE @terminoBusqueda";
+                    break;
+                case "Fecha de reserva":
+                    sql += "Fecha de reserva LIKE @terminoBusqueda";
+                    break;
+                case "Fecha de retorno":
+                    sql += "Fecha de retorno LIKE @terminoBusqueda";
+                    break;
+                default:
+                    sql += "CAST(Id AS TEXT) LIKE @terminoBusqueda OR Usuario LIKE @terminoBusqueda"; // Búsqueda por id y Usuario por defecto
+                    break;
+            }
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, conn);
+                adapter.SelectCommand.Parameters.AddWithValue("@terminoBusqueda", "%" + terminoBusqueda + "%");
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dataGridView1.DataSource = dt;
+            }
+        }
+
+        private void BuscarReservaComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
